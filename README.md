@@ -38,9 +38,7 @@ Refer to `error_handling.c` for the implementation of the interpreter.
 Compile the following files using a C compiler:
 - parser_lexer.c
 - Interpreter_ErrorHandling.c
-
-
-**Example:**
+- Sample_code.c
 
 
 ## Our Design Choices
