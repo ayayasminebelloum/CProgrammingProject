@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef enum {
     ID, IS, NUMBER, TEXT, ADD, SUB, MUL, DIV, PRINT, SEMICOLON, UNKNOWN
@@ -20,14 +21,16 @@ typedef struct Node {
 typedef struct {
     char *name;
     int value;
+    char *text; // Add text field for TEXT token
 } Variable;
 
-Variable variables[26]; // Assuming variables are single letters
+Variable variables[26];
 
 void initVariables() {
     for (int i = 0; i < 26; i++) {
         variables[i].name = NULL;
         variables[i].value = 0;
+        variables[i].text = NULL;
     }
 }
 
@@ -67,6 +70,9 @@ void executeNode(Node *node) {
             case ID:
                 printf("Variable %s = %d\n", node->value, findVariable(node->value)->value);
                 break;
+            case TEXT:
+                printf("Text: %s\n", node->value);
+                break;
             case IS: {
                 Variable *var = findVariable(node->left->value);
                 if (var == NULL) {
@@ -104,13 +110,15 @@ void executeNode(Node *node) {
 }
 
 int main() {
-    const char *source = "x = 10; y = 5; result = x + y; print result;";
+    const char *source = "x = 10; y = 5; result = x + y; print result; textVar = 'Hello, World!'; print textVar;";
 
     Token tokens[] = {
         {ID, "x"}, {IS, "="}, {NUMBER, "10"}, {SEMICOLON, ";"}, 
         {ID, "y"}, {IS, "="}, {NUMBER, "5"}, {SEMICOLON, ";"}, 
         {ID, "result"}, {IS, "="}, {ID, "x"}, {ADD, "+"}, {ID, "y"}, {SEMICOLON, ";"}, 
-        {PRINT, "print"}, {ID, "result"}, {SEMICOLON, ";"}
+        {PRINT, "print"}, {ID, "result"}, {SEMICOLON, ";"}, 
+        {ID, "textVar"}, {IS, "="}, {TEXT, "'Hello, World!'"}, {SEMICOLON, ";"}, 
+        {PRINT, "print"}, {ID, "textVar"}, {SEMICOLON, ";"}
     };
 
     Node *program = createNode(UNKNOWN, "", NULL, NULL);
