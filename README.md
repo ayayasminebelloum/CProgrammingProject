@@ -11,7 +11,7 @@
 ## Language Design (Syntax & Constructs)
 
 - **Assignment:** `IS`
-- **Data Types:** `NUMBER` (INT), `DECIMAL`, `WORDS`, `LETTER`, `T/F`, `LIST`, `DICT`, `GROUP`
+- **Data Types:** `NUMBER` (INT), `DECIMAL`, `TEXT`, `LETTER`, `T/F`, `LIST`, `DICT`, `GROUP`
 - **Operations:** `PRINT`, `ADD`, `SUB`, `DIV`, `MULT`, `EQUAL`, `NOT EQUAL`, `AVG`, `MAX`, `MIN`, `GREATER THAN`, `GREATER OR EQUAL TO`, `LESSER THAN`, `LESSER OR EQUAL TO`
 - **Control Flow:** `IF`, `THEN`, `LOOPS FOR`, `LOOP WHILE`
 - **I/O:** `INPUT`, `OUTPUT`
