@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 typedef enum {
-    ID, ASSIGN, NUMBER, ADD, SUB, MUL, DIV, PRINT, SEMICOLON, UNKNOWN
+    ID, IS, NUMBER, TEXT, ADD, SUB, MUL, DIV, PRINT, SEMICOLON, UNKNOWN
 } TokenType;
 
 typedef struct {
@@ -67,7 +67,7 @@ void executeNode(Node *node) {
             case ID:
                 printf("Variable %s = %d\n", node->value, findVariable(node->value)->value);
                 break;
-            case ASSIGN: {
+            case IS: {
                 Variable *var = findVariable(node->left->value);
                 if (var == NULL) {
                     for (int i = 0; i < 26; i++) {
@@ -107,9 +107,9 @@ int main() {
     const char *source = "x = 10; y = 5; result = x + y; print result;";
 
     Token tokens[] = {
-        {ID, "x"}, {ASSIGN, "="}, {NUMBER, "10"}, {SEMICOLON, ";"}, 
-        {ID, "y"}, {ASSIGN, "="}, {NUMBER, "5"}, {SEMICOLON, ";"}, 
-        {ID, "result"}, {ASSIGN, "="}, {ID, "x"}, {ADD, "+"}, {ID, "y"}, {SEMICOLON, ";"}, 
+        {ID, "x"}, {IS, "="}, {NUMBER, "10"}, {SEMICOLON, ";"}, 
+        {ID, "y"}, {IS, "="}, {NUMBER, "5"}, {SEMICOLON, ";"}, 
+        {ID, "result"}, {IS, "="}, {ID, "x"}, {ADD, "+"}, {ID, "y"}, {SEMICOLON, ";"}, 
         {PRINT, "print"}, {ID, "result"}, {SEMICOLON, ";"}
     };
 
@@ -121,7 +121,7 @@ int main() {
         Node *expression = createNode(tokens[i].type, tokens[i].value, NULL, NULL);
         i++;
 
-        if (tokens[i].type == ASSIGN || tokens[i].type == ADD || tokens[i].type == SUB ||
+        if (tokens[i].type == IS || tokens[i].type == ADD || tokens[i].type == SUB ||
             tokens[i].type == MUL || tokens[i].type == DIV || tokens[i].type == PRINT) {
             Node *operation = createNode(tokens[i].type, tokens[i].value, expression, NULL);
             current->right = operation;
