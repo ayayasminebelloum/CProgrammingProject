@@ -31,12 +31,14 @@ Refer to `interpreter.c` for the implementation of the interpreter.
 
 ## Error Handling
 
-XLang provides informative error messages to assist users in understanding and debugging their code.
+Refer to `error_handling.c` for the implementation of the interpreter.
 
 ## How to Run Programs
 
-1. Compile the source code using a C compiler.
-2. Execute the compiled program, providing the XLang code file as an argument.
+Compile the following files using a C compiler:
+- parser_lexer.c
+- Interpreter_ErrorHandling.c
+
 
 **Example:**
 
@@ -52,7 +54,7 @@ See screenshots and code examples in the repository demonstrating the interprete
 
 ## Sample Program Code
 
-
+Refer to `Sample_code.c` for the implementation of the interpreter.
 
 ## Conclusion
 
