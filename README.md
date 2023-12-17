@@ -39,9 +39,7 @@ XLang provides informative error messages to assist users in understanding and d
 2. Execute the compiled program, providing the XLang code file as an argument.
 
 **Example:**
-```bash
-./xlang_interpreter program.xlang
-```
+
 
 ## Our Design Choices
 
@@ -61,6 +59,3 @@ See screenshots and code examples in the repository demonstrating the interprete
 XLang is a beginner-friendly language aiming to simplify the learning process. Explore the provided sample programs and documentation for a better understanding of the language.
 
 Feel free to reach out for any questions or assistance. Happy coding!
-
-
-https://www.google.com/imgres?imgurl=https%3A%2F%2Fimageio.forbes.com%2Fblogs-images%2Fforbestechcouncil%2Ffiles%2F2019%2F01%2Fcanva-photo-editor-8-7.jpg%3Fheight%3D640%26width%3D640%26fit%3Dbounds&tbnid=40iPsB68e-EIpM&vet=12ahUKEwibrPaZlJeDAxXbmScCHadnCk8QMygBegQIARBz..i&imgrefurl=https%3A%2F%2Fwww.forbes.com%2Fsites%2Fforbestechcouncil%2F2019%2F02%2F22%2Fwant-to-learn-coding-check-out-these-resources-recommended-by-tech-experts%2F&docid=HFKUQzUOY-3f8M&w=640&h=640&q=coding&ved=2ahUKEwibrPaZlJeDAxXbmScCHadnCk8QMygBegQIARBz
