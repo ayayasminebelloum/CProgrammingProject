@@ -1,69 +1,76 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// Define AST node types
 typedef enum {
     ASSIGN_NODE,
     PRINT_NODE,
     ADD_NODE,
     NUMBER_NODE,
-    IDENTIFIER_NODE,
-    UNKNOWN_NODE
-} ASTNodeType;
+    IDENTIFIER_NODE
+} NodeType;
 
-// Define AST node structure
 typedef struct ASTNode {
-    ASTNodeType type;
-    char* value; // For simplicity, assuming it's a string for all node types
-    struct ASTNode* left;
-    struct ASTNode* right;
+    NodeType type;
+    char *value;
+    struct ASTNode *left;
+    struct ASTNode *right;
 } ASTNode;
 
-// Function to interpret the AST
-void interpret(ASTNode* root) {
-    if (root == NULL) {
+ASTNode *create_node(NodeType type, const char *value) {
+    ASTNode *node = malloc(sizeof(ASTNode));
+    node->type = type;
+    node->value = strdup(value);
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+void free_node(ASTNode *node) {
+    if (node == NULL)
         return;
-    }
+    free(node->value);
+    free_node(node->left);
+    free_node(node->right);
+    free(node);
+}
+
+void interpret(ASTNode *root) {
+    if (root == NULL)
+        return;
 
     switch (root->type) {
-        case ASSIGN_NODE:
-            // Interpret assignment node
-            printf("Assign: %s = %s\n", root->left->value, root->right->value);
-            break;
-        case PRINT_NODE:
-            // Interpret print node
-            printf("Print: %s\n", root->left->value);
-            break;
-        case ADD_NODE:
-            // Interpret add node
-            printf("Add: %s + %s\n", root->left->value, root->right->value);
-            break;
-        case NUMBER_NODE:
-            // Interpret number node
-            printf("Number: %s\n", root->value);
-            break;
-        case IDENTIFIER_NODE:
-            // Interpret identifier node
-            printf("Identifier: %s\n", root->value);
-            break;
-        default:
-            printf("Unknown node type\n");
-            break;
+    case ASSIGN_NODE:
+        printf("Assign: %s = %s\n", root->left->value, root->right->value);
+        break;
+    case PRINT_NODE:
+        printf("Print: %s\n", root->left->value);
+        break;
+    case ADD_NODE:
+        printf("Add: %s + %s\n", root->left->value, root->right->value);
+        break;
+    case NUMBER_NODE:
+        printf("Number: %s\n", root->value);
+        break;
+    case IDENTIFIER_NODE:
+        printf("Identifier: %s\n", root->value);
+        break;
+    default:
+        printf("Unknown node type\n");
     }
 
-    // Recursively interpret child nodes
     interpret(root->left);
     interpret(root->right);
 }
 
 int main() {
-    // Example AST (replace with your actual AST)
-    ASTNode* root = malloc(sizeof(ASTNode));
-    root->type = ASSIGN_NODE;
+    ASTNode *root = create_node(ASSIGN_NODE, "=");
     root->left = create_node(IDENTIFIER_NODE, "x");
     root->right = create_node(NUMBER_NODE, "10");
 
-    // Interpret the AST
     interpret(root);
+
+    free_node(root);
 
     return 0;
 }
